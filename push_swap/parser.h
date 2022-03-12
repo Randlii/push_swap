@@ -7,6 +7,7 @@
 
 typedef struct s_nd
 {
+	int num;
 	int index;
 	int flag;
 	struct s_nd *next;

@@ -137,7 +137,7 @@ t_nd	*newlst(int num, int index)
 {
 	t_nd	*list;
 
-	list = malloc(sizeof(t_node));
+	list = malloc(sizeof(t_nd));
 	if (list == NULL)
 		return (NULL);
 	list->num = num;
@@ -148,35 +148,9 @@ t_nd	*newlst(int num, int index)
 	return (list);
 }
 
-
-void	create_stack(t_all *all, int *sort, int *not_sort, int len)
+void	lstadd_back(t_nd **stack_a, t_nd *new)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < len)
-	{
-		j = 0;
-		while (j < len)
-		{
-			if (not_sort[i] == sort[j])
-			{
-				lstadd_back(&all->stack_a, new_list(not_sort[i], j + 1));
-				j++;
-				break ;
-			}
-			j++;
-		}
-		i++;
-	}
-	free(not_sort);
-	free(sort);
-}
-
-void	lstadd_back(t_node **stack_a, t_node *new)
-{
-	t_node	*begin;
+	t_nd	*begin;
 
 	if (new == NULL)
 		return ;
@@ -202,6 +176,31 @@ void	lstadd_back(t_node **stack_a, t_node *new)
 		*stack_a = new;
 	return ;
 }
+void	create_stack(t_all *all, int *sort, int *not_sort, int len)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < len)
+	{
+		j = 0;
+		while (j < len)
+		{
+			if (not_sort[i] == sort[j])
+			{
+				lstadd_back(&all->stack_a, newlst(not_sort[i], j + 1));
+				j++;
+				break ;
+			}
+			j++;
+		}
+		i++;
+	}
+	free(not_sort);
+	free(sort);
+}
+
 
 int main(int argc, char *argv[])
 {
